@@ -1,4 +1,5 @@
 import { CompressedPrefetchGraph, CompressedGraphMap, PrefetchConfig } from '../declarations';
+import { version as guess_version } from '../../package.json';
 
 type GuessFn = (params?: Partial<GuessFnParams>) => Predictions;
 
@@ -130,3 +131,5 @@ export const initialize = (
     return guessNavigation(graph, params as GuessFnParams);
   };
 };
+
+export const version = guess_version;

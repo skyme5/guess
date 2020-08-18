@@ -1,5 +1,5 @@
 import { CompressedPrefetchGraph, CompressedGraphMap, PrefetchConfig } from '../declarations';
-import { guess, initialize as initializeGuess } from './guess';
+import { guess, initialize as initializeGuess, version } from './guess';
 
 const support = (feature: string) => {
   if (typeof document === 'undefined') {
@@ -63,6 +63,10 @@ export const initialize = (
   thresholds: PrefetchConfig
 ) => {
   initializeGuess(global, thresholds, graph, map);
+
+  if (typeof document !== 'undefined' && typeof document.body !== 'undefined'){
+    document.body.setAttribute('guess-version', version);
+  }
 
   // SSR, we return
   if (global.constructor.name !== 'Window' || !global.location) {
